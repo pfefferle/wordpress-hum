@@ -2,7 +2,7 @@
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { ClipboardButton, TextControl } from '@wordpress/components';
-import { useState } from 'react';
+import { useState } from '@wordpress/element';
 
 const HumGutenbergShortlinkPanel = () => {
 	const [ hasCopied, setHasCopied ] = useState( false );
@@ -15,7 +15,7 @@ const HumGutenbergShortlinkPanel = () => {
 		>
 			<TextControl
 				label={ humEditorObject.inputLabel }
-				//hideLabelFromVision="true"
+				hideLabelFromVision="true"
 				value={ humEditorObject.shortlink }
 				disabled
 			/>
