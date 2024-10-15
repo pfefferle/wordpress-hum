@@ -1,17 +1,18 @@
-=== Hum ===
-Contributors: willnorris, pfefferle
-Tags: shortlink, whistle, diso
-Requires at least: 3.0
-Tested up to: 6.6
-Stable tag: 1.3.4
-Requires PHP: 5.6
-License: MIT
-License URI: http://opensource.org/licenses/MIT
+# Hum
+
+- Contributors: willnorris, pfefferle
+- Tags: shortlink, whistle, diso
+- Requires at least: 3.0
+- Tested up to: 6.6
+- Stable tag: 1.3.4
+- Requires PHP: 5.6
+- License: MIT
+- License URI: http://opensource.org/licenses/MIT
 
 Personal URL shortener for WordPress
 
 
-== Description ==
+## Description
 
 Hum is a personal URL shortener for WordPress, designed to provide short URLs to your personal content, both hosted on WordPress and elsewhere.  For example, rather than a long URL for a WordPress post such as <http://willnorris.com/2011/01/hum-personal-url-shortener-wordpress>, you could have a short URL like <http://willnorris.com/b/FJ>.  Additionally, if you have a custom domain for short URLs, you can shorten things further like <http://wjn.me/b/FJ>.  Once the plugin is enabled, the shortlink for a page or post can be found in the "Shortlink" item in the WordPress Admin Bar.
 
@@ -27,13 +28,13 @@ Read more about the reasoning for a personal URL shortener at [Tantek Celik][]'s
 [Whistle]: http://ttk.me/w/Whistle
 
 
-== Installation ==
+## Installation
 
 Follow the normal instructions for [installing WordPress plugins][install].
 
 [install]: http://codex.wordpress.org/Managing_Plugins#Installing_Plugins
 
-= Using a custom domain =
+### Using a custom domain
 
 If you have a custom domain you'd like to use with Hum, add it as the 'Shortlink Base (URL)' on the 'General Settings' WordPress admin page or define the `HUM_SHORTLINK_BASE` constant in your `wp-config.php`:
 
@@ -42,9 +43,9 @@ If you have a custom domain you'd like to use with Hum, add it as the 'Shortlink
 You will also need to setup your short domain to redirect to your normal domain.  Many domain registrars provide free redirection services that work well for this, so you don't need to setup a new domain with your web host. Just make sure that you are **not** using an iframe style redirect.
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= What types of content does Hum support? =
+### What types of content does Hum support?
 
 Out of the box, Hum will provide shortlinks for any content locally hosted on WordPress.  Most shortlinks will use the `b` type prefix, with the exception of posts with a 'status' [post format][], which have shortlinks using the `t` type prefix.  For example:
 
@@ -65,15 +66,15 @@ Additional type prefixes can be registered to serve WordPress hosted content or 
 [post format]: http://codex.wordpress.org/Post_Formats
 
 
-== Developer Documentation ==
+## Developer Documentation
 
-= Adding your Amazon Affiliate ID =
+### Adding your Amazon Affiliate ID
 
 If you'd like to include your Amazone Affiliate ID in the `/i/` redirect URLs, implement the `amazon_affiliate_id` filter.  For example:
 
     add_filter('amazon_affiliate_id', fn() => "willnorris-20");
 
-= Additional Local Types =
+### Additional Local Types
 
 Out of the box, Hum only registers the `b`, `t`, `a` and `p` prefix to be served locally by WordPress.  If you would like to register additional prefixes, implement the `hum_local_types` filter.  For example, to include 'p' as well for photos:
 
@@ -88,8 +89,8 @@ This will tell Hum to serve any `/p/{id}` URLs from WordPress.  Additionally, yo
     function myplugin_hum_type_prefix( $prefix, $post_id ) {
       $post = get_post( $post_id );
 
-      if ( $post->post_type == 'attachment' &&
-           strpos($post->post_mime_type, 'image') === 0 ) {
+      if ( $post->post_type ## 'attachment' &&
+           strpos($post->post_mime_type, 'image') =## 0 ) {
         $prefix = 'p';
       }
 
@@ -97,86 +98,86 @@ This will tell Hum to serve any `/p/{id}` URLs from WordPress.  Additionally, yo
     }
     add_filter('hum_type_prefix', 'myplugin_hum_type_prefix', 10, 2);
 
-= Simple Redirect =
+### Simple Redirect
 
 You can redirect all traffic for a prefix using a single line of PHP my implementing the `hum_redirect_base_{type}` filter where `{type}` is the prefix to redirect.  For example, I redirect all `/w/` URLs to wiki.willnorris.com using:
 
     add_filter('hum_redirect_base_w', fn() => "http://wiki.willnorris.com/");
 
 
-== Changelog ==
+## Changelog
 
 Project maintined on github at [willnorris/wordpress-hum](https://github.com/willnorris/wordpress-hum).
 
-= 1.3.4 =
+### 1.3.4
 
  - fix broken `wp_get_shortlink` hook, when loaded in the frontend
 
-= 1.3.3 =
+### 1.3.3
 
  - fix PHP warning in combination with widgets
 
-= 1.3.2 =
+### 1.3.2
 
  - update documentation
 
-= 1.3.1 =
+### 1.3.1
 
  - change the priority of the rewrite rules action
 
-= 1.3.0 =
+### 1.3.0
 
  - redirect types are now also filterable
 
-= 1.2.8 =
+### 1.2.8
 
  - add shortlink panel to block editor (props [@florianbrinkmann][])
 
-= 1.2.7 =
+### 1.2.7
 
  - redirect only known types (see [#wp180868][])
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.6...1.2.7)
 
-= 1.2.6 =
+### 1.2.6
 
  - fix PHP 7.4 deprecation warning
  - WordPress coding style changes
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.5...1.2.6)
 
-= 1.2.5 =
+### 1.2.5
 
  - add shortlink to post/page overview pages
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.4...1.2.5)
 
-= 1.2.4 =
+### 1.2.4
 
  - finally fixed "flush rewrite rules"
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.3...1.2.4)
 
-= 1.2.3 =
+### 1.2.3
 
  - fixed "flush rewrite rules"
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.2...1.2.3)
 
-= 1.2.2 =
+### 1.2.2
 
  - version bump
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2.1...1.2.2)
 
-= 1.2.1 =
+### 1.2.1
 
  - add `amazon_domain` filter, to support different countries
  - add `hum_process_redirect` action, to overwrite default rewrite method (see [#17][])
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.2...1.2.1)
 
-= 1.2 =
+### 1.2
 
  - move link post format to use 't' prefix instead of 'h' and add support for
    image post format
@@ -188,7 +189,7 @@ Project maintined on github at [willnorris/wordpress-hum](https://github.com/wil
 
 [full changelog](https://github.com/willnorris/wordpress-hum/compare/1.1...1.2)
 
-= 1.1 =
+### 1.1
 
  - allow custom domain to be configured using `HUM_SHORTLINK_BASE` constant or
    via the General Settings admin page.
@@ -212,14 +213,14 @@ Project maintined on github at [willnorris/wordpress-hum](https://github.com/wil
 [#wp180868]: https://wordpress.org/support/topic/causing-404-on-category-tag-pages/
 [@florianbrinkmann]: https://profiles.wordpress.org/florianbrinkmann/
 
-= 1.0 =
+### 1.0
 
  - initial public release
 
 
-== Upgrade Notice ==
+## Upgrade Notice
 
-= 1.1 =
+### 1.1
 
 Adds a new admin UI for setting a custom domain for shortlinks, includes
 smarter URL matching, and adds various small improvements and bug fixes.

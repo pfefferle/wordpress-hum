@@ -2,10 +2,10 @@ name: Plugin asset/readme update
 on:
   push:
     branches:
-    - master
+    - main
 jobs:
-  master:
-    name: Push to master
+  main:
+    name: Push to main
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.1.0
@@ -15,3 +15,4 @@ jobs:
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: hum
+        README_NAME: readme.md
