@@ -1,11 +1,11 @@
 <?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * Plugin Name: Hum
- * Plugin URI: https://github.com/willnorris/wordpress-hum
+ * Plugin URI: https://github.com/pfefferle/wordpress-hum
  * Description: Personal URL shortener for WordPress
- * Author: Will Norris
- * Author URI: https://willnorris.com/
- * Version: 1.3.5
+ * Author: Will Norris & Matthias Pfefferle
+ * Author URI: https://github.com/pfefferle/wordpress-hum
+ * Version: 1.3.6
  * License: MIT
  * License URI: http://opensource.org/licenses/MIT
  * Text Domain: hum
@@ -16,7 +16,6 @@ class Hum {
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'init', array( $this, 'rewrite_rules' ), 15 );
-		add_action( 'init', array( $this, 'register_editor_script' ) );
 
 		register_activation_hook( __FILE__, array( $this, 'flush_rewrite_rules' ) );
 		register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
@@ -54,34 +53,25 @@ class Hum {
 	}
 
 	/**
-	 * Register editor script.
-	 */
-	public function register_editor_script() {
-		// Load dependencies and version info.
-		$asset_info = include plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
-
-		wp_register_script(
-			'hum-editor-script',
-			plugins_url( 'build/index.js', __FILE__ ),
-			$asset_info['dependencies'],
-			$asset_info['version']
-		);
-	}
-
-	/**
 	 * Enqueue editor script.
 	 */
 	public function enqueue_block_editor_script() {
-		wp_enqueue_script( 'hum-editor-script' );
+		// Load dependencies and version info.
+		$asset_info = include plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
+
+		wp_enqueue_script(
+			'hum-editor-script',
+			plugins_url( 'build/index.js', __FILE__ ),
+			$asset_info['dependencies'],
+			$asset_info['version'],
+			true
+		);
 
 		wp_localize_script(
 			'hum-editor-script',
-			'humEditorObject',
+			'_humEditorObject',
 			array(
-				'shortlink'             => wp_get_shortlink(),
-				'inputLabel'            => __( 'Shortlink', 'hum' ),
-				'copyButtonLabel'       => __( 'Copy link', 'hum' ),
-				'copyButtonCopiedLabel' => __( 'Copied!', 'hum' ),
+				'shortlink' => wp_get_shortlink(),
 			)
 		);
 	}

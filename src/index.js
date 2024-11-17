@@ -3,8 +3,10 @@ import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { ClipboardButton, TextControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 const HumGutenbergShortlinkPanel = () => {
+	const { shortlink } = window._humEditorObject;
 	const [ hasCopied, setHasCopied ] = useState( false );
 
 	return (
@@ -14,18 +16,18 @@ const HumGutenbergShortlinkPanel = () => {
 			className="shortlink-panel"
 		>
 			<TextControl
-				label={ humEditorObject.inputLabel }
+				label={ __( 'Shortlink', 'hum' ) }
 				hideLabelFromVision="true"
-				value={ humEditorObject.shortlink }
+				value={ shortlink }
 				disabled
 			/>
 			<ClipboardButton
 				isPrimary
-				text={ humEditorObject.shortlink }
+				text={ shortlink }
 				onCopy={ () => setHasCopied( true ) }
 				onFinishCopy={ () => setHasCopied( false ) }
 			>
-				{ hasCopied ? humEditorObject.copyButtonCopiedLabel : humEditorObject.copyButtonLabel }
+				{ hasCopied ? __( 'Copied!', 'hum' ) : __( 'Copy link', 'hum' ) }
 			</ClipboardButton>
 		</PluginDocumentSettingPanel>
 	);
