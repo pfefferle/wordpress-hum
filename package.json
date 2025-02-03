@@ -7,6 +7,6 @@
   "author": "Will Norris",
   "license": "MIT",
   "dependencies": {
-    "@wordpress/scripts": "^30.9.0"
+    "@wordpress/scripts": "^30.10.0"
   }
 }
