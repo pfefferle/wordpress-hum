@@ -65,6 +65,10 @@ Additional type prefixes can be registered to serve WordPress hosted content or 
 
 [post format]: http://codex.wordpress.org/Post_Formats
 
+### Redirects are not working and result in a 404.
+
+This can happen if the rewrite rules were not flushed. This most likely happens if you are using Hum on a Multisite. This can be fixed by flushing the rewrite rules, just go to Settings->Permalinks and hit `Save Changes` on each instance where Hum does not work as intended.
+
 
 ## Developer Documentation
 
