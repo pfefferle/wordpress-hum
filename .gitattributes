@@ -5,7 +5,7 @@
 .wordpress-org export-ignore
 .editorconfig export-ignore
 phpcs.xml export-ignore
-docker-compose.yml export-ignore
+.wp-env.json export-ignore
 src export-ignore
 composer.json export-ignore
 composer.lock export-ignore
