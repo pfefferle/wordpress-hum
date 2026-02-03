@@ -6,7 +6,7 @@
     "@wordpress/scripts": "^31.4.0"
   },
   "devDependencies": {
-    "@wordpress/env": "^10.0.0"
+    "@wordpress/env": "^10.39.0"
   },
   "scripts": {
     "build": "wp-scripts build",
