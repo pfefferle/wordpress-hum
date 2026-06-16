@@ -2,7 +2,7 @@
 	"name": "willnorris/wordpress-hum",
 	"description": "Personal URL shortener for WordPress",
 	"require": {
-	  "php": ">=5.6.0",
+	  "php": ">=7.4",
 	  "composer/installers": "^1.0 || ^2.0"
 	},
 	"type": "wordpress-plugin",
