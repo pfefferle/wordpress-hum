@@ -12,6 +12,7 @@
 	<coverage>
 		<include>
 			<file>./hum.php</file>
+			<directory suffix=".php">./includes</directory>
 		</include>
 	</coverage>
 </phpunit>
