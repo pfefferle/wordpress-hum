@@ -5,7 +5,7 @@
  * Description: Personal URL shortener for WordPress
  * Author: Will Norris & Matthias Pfefferle
  * Author URI: https://github.com/pfefferle/wordpress-hum
- * Version: 1.3.6
+ * Version: 1.4.0
  * License: MIT
  * License URI: http://opensource.org/licenses/MIT
  * Text Domain: hum

@@ -4,7 +4,7 @@
 - Tags: shortlink, whistle, diso
 - Requires at least: 3.0
 - Tested up to: 7.1
-- Stable tag: 1.3.6
+- Stable tag: 1.4.0
 - Requires PHP: 7.4
 - License: MIT
 - License URI: http://opensource.org/licenses/MIT
@@ -112,6 +112,14 @@ You can redirect all traffic for a prefix using a single line of PHP my implemen
 ## Changelog
 
 Project maintined on github at [willnorris/wordpress-hum](https://github.com/willnorris/wordpress-hum).
+
+### 1.4.0
+
+ - minimum PHP version is now 7.4
+ - fix a PHP 8 `ValueError` in the legacy FTL decoder, thanks @apermo
+ - new `hum_enable_legacy_ftl` filter to switch off legacy FTL shortlinks
+ - use a namespace instead of a class
+ - add a plugin icon and banner
 
 ### 1.3.6
 
