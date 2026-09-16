@@ -39,7 +39,7 @@
 		"vendor/bin/phpunit"
 	  ],
 	  "test:wp-env": [
-		"wp-env run tests-cli --env-cwd=\"wp-content/plugins/hum\" vendor/bin/phpunit"
+		"npx wp-env run tests-cli --env-cwd=wp-content/plugins/hum vendor/bin/phpunit"
 	  ]
 	},
 	"config": {

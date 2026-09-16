@@ -8,18 +8,9 @@
 namespace Hum\Tests;
 
 /**
- * Test class for Hum::legacy_ftl_id().
- *
- * @coversDefaultClass \Hum
+ * Test class for \Hum\legacy_ftl_id().
  */
 class Test_Legacy_Ftl extends \WP_UnitTestCase {
-
-	/**
-	 * Plugin instance under test.
-	 *
-	 * @var \Hum
-	 */
-	protected $hum;
 
 	/**
 	 * Post ID whose base-32 representation ("fba") survives the hex filter.
@@ -27,15 +18,6 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 * @var int
 	 */
 	const KNOWN_POST_ID = 15722;
-
-	/**
-	 * Set up the test.
-	 */
-	public function set_up() {
-		parent::set_up();
-
-		$this->hum = new \Hum();
-	}
 
 	/**
 	 * Tear down the test.
@@ -58,33 +40,33 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	/**
 	 * A numeric path resolves to the post with that ID.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_numeric_path_resolves_to_post() {
 		$post_id = $this->create_known_post();
 
-		$this->assertSame( $post_id, $this->hum->legacy_ftl_id( 0, (string) $post_id ) );
+		$this->assertSame( $post_id, \Hum\legacy_ftl_id( 0, (string) $post_id ) );
 	}
 
 	/**
 	 * A base-32 path resolves to the post with the decoded ID.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_base32_path_resolves_to_post() {
 		$post_id = $this->create_known_post();
 
 		// base_convert( 'fba', 32, 10 ) === 15722.
-		$this->assertSame( $post_id, $this->hum->legacy_ftl_id( 0, 'fba' ) );
+		$this->assertSame( $post_id, \Hum\legacy_ftl_id( 0, 'fba' ) );
 	}
 
 	/**
 	 * A path that decodes to a non-existent post leaves the incoming ID untouched.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_unknown_post_returns_incoming_id() {
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, 'ffffff' ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, 'ffffff' ) );
 	}
 
 	/**
@@ -95,10 +77,10 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 *
 	 * @link https://github.com/pfefferle/wordpress-hum/issues/41
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_very_long_path_does_not_throw() {
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, str_repeat( 'f', 400 ) ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, str_repeat( 'f', 400 ) ) );
 	}
 
 	/**
@@ -108,12 +90,12 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 * longer can never be a valid post ID and should bail before hitting the
 	 * database.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_overlong_path_bails_without_querying() {
 		$queries = get_num_queries();
 
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, str_repeat( 'f', 14 ) ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, str_repeat( 'f', 14 ) ) );
 		$this->assertSame( $queries, get_num_queries(), 'An over-length path should not hit the database.' );
 	}
 
@@ -122,12 +104,12 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 *
 	 * Guards against the length check being off by one.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_boundary_length_path_is_still_looked_up() {
 		$queries = get_num_queries();
 
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, str_repeat( 'f', 13 ) ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, str_repeat( 'f', 13 ) ) );
 		$this->assertGreaterThan( $queries, get_num_queries(), 'A 13-character path should still be looked up.' );
 	}
 
@@ -138,12 +120,12 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 * the global `$post` — which would redirect the request to whatever post
 	 * happened to be in the global.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_path_without_hex_characters_ignores_global_post() {
 		$GLOBALS['post'] = self::factory()->post->create_and_get();
 
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, 'wxyz' ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, 'wxyz' ) );
 
 		unset( $GLOBALS['post'] );
 	}
@@ -151,27 +133,27 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	/**
 	 * The decoder is enabled by default.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_decoder_is_enabled_by_default() {
 		$post_id = $this->create_known_post();
 
 		$this->assertTrue( apply_filters( 'hum_enable_legacy_ftl', true ) );
-		$this->assertSame( $post_id, $this->hum->legacy_ftl_id( 0, 'fba' ) );
+		$this->assertSame( $post_id, \Hum\legacy_ftl_id( 0, 'fba' ) );
 	}
 
 	/**
 	 * `hum_enable_legacy_ftl` turns the decoder off.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_filter_disables_decoder() {
 		$this->create_known_post();
 
 		add_filter( 'hum_enable_legacy_ftl', '__return_false' );
 
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, 'fba' ) );
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, (string) self::KNOWN_POST_ID ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, 'fba' ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, (string) self::KNOWN_POST_ID ) );
 	}
 
 	/**
@@ -182,15 +164,15 @@ class Test_Legacy_Ftl extends \WP_UnitTestCase {
 	 * but it is the documented pre-existing behaviour and `hum_enable_legacy_ftl`
 	 * is the way out of it.
 	 *
-	 * @covers ::legacy_ftl_id
+	 * @covers \Hum\legacy_ftl_id
 	 */
 	public function test_ordinary_path_is_decoded_when_enabled() {
 		$post_id = $this->create_known_post();
 
-		$this->assertSame( $post_id, $this->hum->legacy_ftl_id( 0, 'foo/bar' ) );
+		$this->assertSame( $post_id, \Hum\legacy_ftl_id( 0, 'foo/bar' ) );
 
 		add_filter( 'hum_enable_legacy_ftl', '__return_false' );
 
-		$this->assertSame( 0, $this->hum->legacy_ftl_id( 0, 'foo/bar' ) );
+		$this->assertSame( 0, \Hum\legacy_ftl_id( 0, 'foo/bar' ) );
 	}
 }
