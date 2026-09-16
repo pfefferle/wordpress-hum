@@ -5,6 +5,7 @@
 	<!-- What to scan -->
 	<file>./hum.php</file>
 	<file>./includes/</file>
+	<file>./tests/</file>
 
 	<!-- Exclude patterns -->
 	<exclude-pattern>vendor/*</exclude-pattern>
