@@ -1,10 +1,8 @@
 {
   "name": "hum",
+  "private": true,
   "author": "Will Norris",
   "license": "MIT",
-  "dependencies": {
-    "@wordpress/scripts": "^35.0.0"
-  },
   "devDependencies": {
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -14,7 +12,8 @@
     "@wordpress/element": "^8.7.0",
     "@wordpress/env": "^11.15.0",
     "@wordpress/i18n": "^6.28.0",
-    "@wordpress/plugins": "^7.55.0"
+    "@wordpress/plugins": "^7.55.0",
+    "@wordpress/scripts": "^35.0.0"
   },
   "scripts": {
     "build": "wp-scripts build",
