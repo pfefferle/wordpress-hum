@@ -120,6 +120,7 @@ Project maintined on github at [willnorris/wordpress-hum](https://github.com/wil
  - new `hum_enable_legacy_ftl` filter to switch off legacy FTL shortlinks
  - use a namespace instead of a class
  - add a plugin icon and banner
+ - add PHPUnit and Jest tests
 
 ### 1.3.6
 
