@@ -21,19 +21,19 @@ class Test_Newbase60 extends \WP_UnitTestCase {
 	 */
 	public function data_pairs() {
 		return array(
-			'single digit'       => array( 1, '1' ),
-			'last digit'         => array( 9, '9' ),
-			'first letter'       => array( 10, 'A' ),
-			'skips I'            => array( 18, 'J' ),
-			'skips O'            => array( 23, 'P' ),
-			'underscore'         => array( 34, '_' ),
-			'first lowercase'    => array( 35, 'a' ),
-			'skips l'            => array( 46, 'm' ),
-			'highest digit'      => array( 59, 'z' ),
-			'two digits'         => array( 60, '10' ),
-			'readme example'     => array( 918, 'FJ' ),
-			'three digits'       => array( 3600, '100' ),
-			'large number'       => array( 2147483647, '2kh3E7' ),
+			'single digit'    => array( 1, '1' ),
+			'last digit'      => array( 9, '9' ),
+			'first letter'    => array( 10, 'A' ),
+			'skips I'         => array( 18, 'J' ),
+			'skips O'         => array( 23, 'P' ),
+			'underscore'      => array( 34, '_' ),
+			'first lowercase' => array( 35, 'a' ),
+			'skips l'         => array( 46, 'm' ),
+			'highest digit'   => array( 59, 'z' ),
+			'two digits'      => array( 60, '10' ),
+			'readme example'  => array( 918, 'FJ' ),
+			'three digits'    => array( 3600, '100' ),
+			'large number'    => array( 2147483647, '2kh3E7' ),
 		);
 	}
 
