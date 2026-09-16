@@ -1,5 +1,5 @@
 {
-	"name": "willnorris/wordpress-hum",
+	"name": "pfefferle/wordpress-hum",
 	"description": "Personal URL shortener for WordPress",
 	"require": {
 	  "php": ">=7.4",

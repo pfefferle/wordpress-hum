@@ -2,7 +2,7 @@
 
 - Contributors: willnorris, pfefferle
 - Tags: shortlink, whistle, diso
-- Requires at least: 3.0
+- Requires at least: 6.5
 - Tested up to: 7.1
 - Stable tag: 1.4.0
 - Requires PHP: 7.4
@@ -111,7 +111,7 @@ You can redirect all traffic for a prefix using a single line of PHP my implemen
 
 ## Changelog
 
-Project maintined on github at [willnorris/wordpress-hum](https://github.com/willnorris/wordpress-hum).
+Project maintained on GitHub at [pfefferle/wordpress-hum](https://github.com/pfefferle/wordpress-hum).
 
 ### 1.4.0
 
