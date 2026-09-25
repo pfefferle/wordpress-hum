@@ -1,7 +1,7 @@
 # Hum
 
 - Contributors: willnorris, pfefferle
-- Tags: shortlink, whistle, diso
+- Tags: shortlink, whistle, diso, indieweb, shorturl
 - Requires at least: 6.5
 - Tested up to: 7.1
 - Stable tag: 1.4.0

@@ -1,0 +1,42 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/edit.php",
+	"steps": [
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"permalink_structure": "/%postname%/",
+				"blogname": "Hum Demo",
+				"blogdescription": "Personal URL shortener for WordPress"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "hum"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "login",
+			"username": "admin",
+			"password": "password"
+		},
+		{
+			"step": "mkdir",
+			"path": "/wordpress/wp-content/mu-plugins"
+		},
+		{
+			"step": "writeFile",
+			"path": "/wordpress/wp-content/mu-plugins/hum-demo-notice.php",
+			"data": "<?php\nadd_action(\n\t'admin_notices',\n\tfunction () {\n\t\tglobal $pagenow;\n\t\tif ( 'edit.php' !== $pagenow ) {\n\t\t\treturn;\n\t\t}\n\t\techo '<div class=\"notice notice-info\"><p>👋 Hum adds a <strong>Shortlink</strong> column to the post list below. Standard posts use the <code>b</code> prefix, posts with the \"Status\" post format use <code>t</code>. Open one of the shortlinks to see the redirect.</p></div>';\n\t}\n);\n"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once '/wordpress/wp-load.php';\nwp_update_post(\n\tarray(\n\t\t'ID'           => 1,\n\t\t'post_title'   => 'Hello Hum',\n\t\t'post_content' => '<!-- wp:paragraph --><p>This post has the ID 1, so its shortlink is <a href=\"/b/1\"><code>/b/1</code></a>.</p><!-- /wp:paragraph -->',\n\t)\n);\n\n$posts = array(\n\tarray(\n\t\t'title'   => 'Why I use a personal URL shortener',\n\t\t'content' => 'Short URLs for my own content, on my own domain. No third party service in between.',\n\t),\n\tarray(\n\t\t'title'   => 'Just shipped a new version',\n\t\t'content' => 'Just shipped a new version of Hum!',\n\t\t'format'  => 'status',\n\t),\n\tarray(\n\t\t'title'   => 'NewBase60',\n\t\t'content' => 'Hum encodes the post ID with NewBase60. It avoids characters that are easy to confuse, like 1, l and I.',\n\t),\n\tarray(\n\t\t'title'   => 'Coffee time',\n\t\t'content' => 'Coffee time ☕',\n\t\t'format'  => 'status',\n\t),\n\tarray(\n\t\t'title'   => 'A long post with a very long permalink that nobody wants to type or share',\n\t\t'content' => 'This is where a shortlink helps.',\n\t),\n);\n\nforeach ( $posts as $i => $post ) {\n\t$post_id = wp_insert_post(\n\t\tarray(\n\t\t\t'post_title'   => $post['title'],\n\t\t\t'post_content' => '<!-- wp:paragraph --><p>' . $post['content'] . '</p><!-- /wp:paragraph -->',\n\t\t\t'post_status'  => 'publish',\n\t\t\t'post_date'    => gmdate( 'Y-m-d H:i:s', time() - ( count( $posts ) - $i ) * HOUR_IN_SECONDS ),\n\t\t)\n\t);\n\n\tif ( ! empty( $post['format'] ) ) {\n\t\tset_post_format( $post_id, $post['format'] );\n\t}\n}\n\nflush_rewrite_rules();\n"
+		}
+	]
+}
