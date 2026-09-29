@@ -10,7 +10,7 @@
     "@wordpress/components": "^41.0.0",
     "@wordpress/editor": "^15.1.0",
     "@wordpress/element": "^8.8.0",
-    "@wordpress/env": "^11.15.0",
+    "@wordpress/env": "^11.16.0",
     "@wordpress/i18n": "^6.28.0",
     "@wordpress/plugins": "^7.55.0",
     "@wordpress/scripts": "^35.0.0"
