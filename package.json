@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^14.6.7",
     "@wordpress/components": "^41.0.0",
     "@wordpress/editor": "^15.1.0",
-    "@wordpress/element": "^8.8.0",
+    "@wordpress/element": "^9.0.0",
     "@wordpress/env": "^11.17.0",
     "@wordpress/i18n": "^6.30.0",
     "@wordpress/plugins": "^7.55.0",
