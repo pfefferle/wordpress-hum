@@ -13,7 +13,7 @@
     "@wordpress/env": "^12.0.0",
     "@wordpress/i18n": "^7.0.0",
     "@wordpress/plugins": "^8.1.0",
-    "@wordpress/scripts": "^35.0.0"
+    "@wordpress/scripts": "^37.1.0"
   },
   "scripts": {
     "build": "wp-scripts build",
