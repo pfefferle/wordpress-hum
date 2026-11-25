@@ -18,7 +18,7 @@
     "@wordpress/plugins": "^8.2.0",
     "@wordpress/scripts": "^37.2.0",
     "babel-jest": "^30.5.0",
-    "jest": "^30.5.0",
+    "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.0"
   },
   "scripts": {
